@@ -3,7 +3,9 @@ import models.RawModel;
 import models.TexturedModel;
 
 import org.lwjgl.opengl.Display;
+import org.lwjgl.util.vector.Vector3f;
 
+import Entities.Entity;
 import Shaders.StaticShader;
 import Textures.ModelTexture;
 import renderEngine.DisplayManager;
@@ -39,13 +41,15 @@ public class MainGameLoop {
 				1,0 //V3
 		};
 		RawModel model = loader.loadtoVAO(vertices, textureCoords, indicies);
-		ModelTexture texture = new ModelTexture(loader.loadTexture("doge-600"));
-		TexturedModel texturedModel = new TexturedModel(model, texture);
+		TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("doge-600")));
+		//TexturedModel staticModel = new TexturedModel(model, texture);
+		
+		Entity entity = new Entity(staticModel, new Vector3f(-1,0,0),0,0,0,1);
 		while(!Display.isCloseRequested()){
 			renderer.prepare();
 			shader.start();
 		//game logic
-		renderer.render(texturedModel);
+		renderer.render(entity,shader);
 		shader.stop();
 		DisplayManager.updateDisplay();
 
