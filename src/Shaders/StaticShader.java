@@ -12,6 +12,7 @@ private static final String FRAGMENT_FILE = "src/shaders/fragmentShader.txt";
 	@Override
 	protected void bindAttributes() {
 		super.bindAttribute(0, "position");
+		super.bindAttribute(1, "textureCoords");
 		// TODO Auto-generated method stub
 		
 	}

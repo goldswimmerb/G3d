@@ -1,10 +1,13 @@
 package engineTester;
+import models.RawModel;
+import models.TexturedModel;
+
 import org.lwjgl.opengl.Display;
 
 import Shaders.StaticShader;
+import Textures.ModelTexture;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
-import renderEngine.RawModel;
 import renderEngine.Renderer;
 public class MainGameLoop {
 
@@ -29,13 +32,20 @@ public class MainGameLoop {
 				0, 1, 3,
 				3, 1, 2
 		};
-		
-		RawModel model = loader.loadtoVAO(vertices, indicies);
+		float[] textureCoords ={
+				0,0, //V0
+				0,1, //V1
+				1,1, //V2
+				1,0 //V3
+		};
+		RawModel model = loader.loadtoVAO(vertices, textureCoords, indicies);
+		ModelTexture texture = new ModelTexture(loader.loadTexture("doge-600"));
+		TexturedModel texturedModel = new TexturedModel(model, texture);
 		while(!Display.isCloseRequested()){
 			renderer.prepare();
 			shader.start();
 		//game logic
-		renderer.render(model);
+		renderer.render(texturedModel);
 		shader.stop();
 		DisplayManager.updateDisplay();
 
