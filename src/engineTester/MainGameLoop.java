@@ -18,7 +18,8 @@ import renderEngine.DisplayManager;
 import renderEngine.Loader;
 import renderEngine.MasterRenderer;
 import renderEngine.OBJLoader;
-import renderEngine.Renderer;
+import terrains.terrain;
+//import renderEngine.Renderer;
 public class MainGameLoop {
 
 	public static void main(String[] args) {
@@ -131,35 +132,42 @@ public class MainGameLoop {
 
 		};
 		*/
-		RawModel model = OBJLoader.loadObjModel("box", loader);
-		TexturedModel cubeModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("doge-600")));
-		//TexturedModel staticModel = new TexturedModel(model, texture);
-		//ModelTexture texture = staticModel.getTexture();
+		RawModel model = OBJLoader.loadObjModel("dragon", loader);
+		TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("doge-600")));
+		
+		
+		///TexturedModel staticModel = new TexturedModel(model, texture);
+		ModelTexture texture = staticModel.getTexture();
 		//texture.setShineDamper(5);
 		//texture.setReflectivity(1);
-		//Entity entity = new Entity(staticModel, new Vector3f(0,0,-25),0,0,0,1);
+		Entity entity = new Entity(staticModel, new Vector3f(0,0,-25),0,0,0,1);
+		terrain terrain = new terrain(0,0, loader, new ModelTexture(loader.loadTexture("doge-600")));
+		terrain terrain2 = new terrain(1,0, loader, new ModelTexture(loader.loadTexture("doge-600")));
+
 		Light light = new Light(new Vector3f(3000,2000,3000),new Vector3f(1,1,1));
 		Camera camera = new Camera();
 		List<Entity> allCubes = new ArrayList<Entity>();
 		Random random = new Random();
 		
-		for(int i = 0; i<200;i++){
+		/*for(int i = 0; i<200;i++){
 			float x = random.nextFloat() * 100-50;
 			float y = random.nextFloat() * 100-50;
 			float z = random.nextFloat() * -300;
-			allCubes.add(new Entity(cubeModel, new Vector3f(x,y,z), random.nextFloat() *180f,
-					random.nextFloat() *180f,0f,1f));
-		}
+			allCubes.add(new Entity(staticModel, new Vector3f(x,y,z), random.nextFloat() *180f,
+					random.nextFloat() *180f,0f,1f));*/
+		
 		
 		MasterRenderer renderer = new MasterRenderer();
 		while(!Display.isCloseRequested()){
 			//sets change in position x, y, z
-			
+			entity.increaseRotation(0, 1, 0);
 			//entity.increasePosition(0, 0, -0.1f);
 			camera.move();
-			for(Entity cube : allCubes){
-				renderer.processEntity(cube);
-			}
+			renderer.processTerrain(terrain);
+			renderer.processTerrain(terrain2);
+			//for(Entity cube : allCubes){
+				//renderer.processEntity(cube);
+			//}
 			//sets change in rotation x, y, z
 			//entity.increaseRotation(0, 0, 0);
 			//prepares the renderer to "draw" the program
