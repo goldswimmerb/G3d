@@ -2,6 +2,7 @@ package renderEngine;
 
 
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +16,13 @@ public class Loader {
 	
 	private List<Integer> vaos = new ArrayList<Integer>();
 	private List<Integer> vbos = new ArrayList<Integer>();
-	public RawModel loadtoVAO(float[] positions){
+	
+	public RawModel loadtoVAO(float[] positions, int[] indicies){
 		int vaoID = createVAO();
+		bindIndiciesBuffer(indicies);
 		storeDataInAttributeList(0, positions);
 		unbindVAO();
-		return new RawModel(vaoID, positions.length/3);
+		return new RawModel(vaoID, indicies.length);
 		
 	}
 	public void cleanUP(){
@@ -49,6 +52,19 @@ public class Loader {
 	}
 	private void unbindVAO(){
 		GL30.glBindVertexArray(0);
+	}
+	private void bindIndiciesBuffer(int[] indicies){
+		int vboID = GL15.glGenBuffers();
+		vbos.add(vboID);
+		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, vboID);
+		IntBuffer buffer = storeDataInIntBuffer(indicies);
+		GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
+	}
+	private IntBuffer storeDataInIntBuffer(int[] data){
+		IntBuffer buffer = BufferUtils.createIntBuffer(data.length);
+		buffer.put(data);
+		buffer.flip();
+		return buffer;
 	}
 	private FloatBuffer storeDataInFloatBuffer(float[] data){
 		FloatBuffer buffer = BufferUtils.createFloatBuffer(data.length);
