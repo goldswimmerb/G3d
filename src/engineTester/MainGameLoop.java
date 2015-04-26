@@ -18,7 +18,7 @@ import renderEngine.DisplayManager;
 import renderEngine.Loader;
 import renderEngine.MasterRenderer;
 import renderEngine.OBJLoader;
-import terrains.terrain;
+import terrains.Terrain;
 //import renderEngine.Renderer;
 public class MainGameLoop {
 
@@ -141,8 +141,8 @@ public class MainGameLoop {
 		//texture.setShineDamper(5);
 		//texture.setReflectivity(1);
 		Entity entity = new Entity(staticModel, new Vector3f(0,0,-25),0,0,0,1);
-		terrain terrain = new terrain(0,0, loader, new ModelTexture(loader.loadTexture("doge-600")));
-		terrain terrain2 = new terrain(1,0, loader, new ModelTexture(loader.loadTexture("doge-600")));
+		Terrain terrain = new Terrain(0,0, loader, new ModelTexture(loader.loadTexture("doge-600")));
+		Terrain terrain2 = new Terrain(1,0, loader, new ModelTexture(loader.loadTexture("doge-600")));
 
 		Light light = new Light(new Vector3f(3000,2000,3000),new Vector3f(1,1,1));
 		Camera camera = new Camera();

@@ -9,7 +9,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 
-import terrains.terrain;
+import terrains.Terrain;
 import models.TexturedModel;
 import Entities.Camera;
 import Entities.Entity;
@@ -28,7 +28,7 @@ public class MasterRenderer {
 	private TerrainRenderer terrainRenderer;
 	private TerrainShader terrainShader = new TerrainShader();
 	private Map<TexturedModel, List <Entity>> entities = new HashMap<TexturedModel, List<Entity>>();
-	private List<terrain> terrains = new ArrayList<terrain>();
+	private List<Terrain> terrains = new ArrayList<Terrain>();
 	public MasterRenderer(){
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glCullFace(GL11.GL_BACK);
@@ -42,18 +42,19 @@ public class MasterRenderer {
 		shader.loadLight(sun);
 		shader.loadViewMatrix(camera);
 		renderer.render(entities);
-		shader.stop();
+		//9shader.stop();
 		terrainShader.start();
 		terrainShader.loadLight(sun);
 		terrainShader.loadViewMatrix(camera);
 		terrainRenderer.render(terrains);
 		terrainShader.stop();
+		shader.stop();
 		terrains.clear();
 		entities.clear();
 		
 	}
 	
-	public void processTerrain(terrain terrain){
+	public void processTerrain(Terrain terrain){
 		terrains.add(terrain);
 	}
 	public void processEntity(Entity entity){

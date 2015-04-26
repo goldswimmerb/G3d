@@ -4,7 +4,7 @@ import models.RawModel;
 import Textures.ModelTexture;
 import renderEngine.Loader;
 
-public class terrain {
+public class Terrain {
 	private static final float SIZE = 800;
 	private static final int VERTEX_COUNT = 128;
 	
@@ -13,7 +13,7 @@ public class terrain {
 	private RawModel model;
 	private ModelTexture texture;
 	
-	public terrain(int gridX, int gridZ, Loader loader, ModelTexture texture){
+	public Terrain(int gridX, int gridZ, Loader loader, ModelTexture texture){
 		this.texture = texture;
 		this.x = gridX * SIZE;
 		this.z = gridZ * SIZE;

@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL30;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
-import terrains.terrain;
+import terrains.Terrain;
 import toolbox.Maths;
 import Entities.Entity;
 import Shaders.TerrainShader;
@@ -29,8 +29,8 @@ public class TerrainRenderer {
 				shader.stop();
 		
 	}
-	public void render(List<terrain> terrains){
-		for(terrain terrain:terrains){
+	public void render(List<Terrain> terrains){
+		for(Terrain terrain:terrains){
 			prepareTerrain(terrain);
 			loadModelMatrix(terrain);
 			GL11.glDrawElements(GL11.GL_TRIANGLES, terrain.getModel().getVertexCount(),GL11.GL_UNSIGNED_INT,0);
@@ -38,7 +38,7 @@ public class TerrainRenderer {
 			
 		}
 	}	
-	private void prepareTerrain(terrain terrain){
+	private void prepareTerrain(Terrain terrain){
 		//TexturedModel model = entity.getModel();
 		RawModel rawModel = terrain.getModel();
 		GL30.glBindVertexArray(rawModel.getVaoID());
@@ -58,7 +58,7 @@ public class TerrainRenderer {
 		GL30.glBindVertexArray(0);
 	}
 	
-	private void loadModelMatrix(terrain terrain){
+	private void loadModelMatrix(Terrain terrain){
 		Matrix4f transformationMatrix = Maths.createTrandformationMatrix(new Vector3f( terrain.getX(), 0, terrain.getZ()), 0, 0,0,1);
 		shader.loadTransformationMatrix(transformationMatrix);
 		
