@@ -11,6 +11,7 @@ import Shaders.StaticShader;
 import Textures.ModelTexture;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
+import renderEngine.OBJLoader;
 import renderEngine.Renderer;
 public class MainGameLoop {
 
@@ -45,7 +46,7 @@ public class MainGameLoop {
 		};
 		*/
 		// this is a cube
-		float[] vertices = {			
+		/*float[] vertices = {			
 				-0.5f,0.5f,-0.5f,	
 				-0.5f,-0.5f,-0.5f,	
 				0.5f,-0.5f,-0.5f,	
@@ -123,18 +124,18 @@ public class MainGameLoop {
 				23,21,22
 
 		};
-		
-		RawModel model = loader.loadtoVAO(vertices, textureCoords, indices);
-		TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("doge-600")));
+		*/
+		RawModel model = OBJLoader.loadObjModel("stall", loader);
+		TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("stallTexture")));
 		//TexturedModel staticModel = new TexturedModel(model, texture);
 		
-		Entity entity = new Entity(staticModel, new Vector3f(0,0,-5),0,0,0,1);
+		Entity entity = new Entity(staticModel, new Vector3f(0,0,-50),0,0,0,1);
 		Camera camera = new Camera();
 		
 		
 		while(!Display.isCloseRequested()){
 			//sets change in position x, y, z
-			entity.increaseRotation(1, 1, 0);
+			entity.increaseRotation(0, 1, 0);
 			//entity.increasePosition(0, 0, -0.1f);
 			camera.move();
 			//sets change in rotation x, y, z
