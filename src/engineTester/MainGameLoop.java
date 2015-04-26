@@ -17,8 +17,9 @@ public class MainGameLoop {
 		// TODO Auto-generated method stub
 		DisplayManager.createDisplay();
 		Loader loader = new Loader();
-		Renderer renderer = new Renderer();
+		
 		StaticShader shader = new StaticShader();
+		Renderer renderer = new Renderer(shader);
 		
 		float[] vertices = { 
 				//Left bottom Triangle
@@ -44,14 +45,20 @@ public class MainGameLoop {
 		TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("doge-600")));
 		//TexturedModel staticModel = new TexturedModel(model, texture);
 		
-		Entity entity = new Entity(staticModel, new Vector3f(-1,0,0),0,0,0,1);
+		Entity entity = new Entity(staticModel, new Vector3f(0,0,-1),0,0,0,1);
 		while(!Display.isCloseRequested()){
-			entity.increasePosition(0.002f, 0, 0);
-			entity.increaseRotation(0, 1, 0);
+			//sets change in position x, y, z
+			entity.increasePosition(0, 0, -0.1f);
+			//sets change in rotation x, y, z
+			entity.increaseRotation(0, 0, 0);
+			//prepares the renderer to "draw" the program
 			renderer.prepare();
+			//starts the shaders
 			shader.start();
 		//game logic
+			//tells renderer what to render
 		renderer.render(entity,shader);
+		//stops the shaders
 		shader.stop();
 		DisplayManager.updateDisplay();
 
