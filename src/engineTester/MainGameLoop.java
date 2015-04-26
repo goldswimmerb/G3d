@@ -1,4 +1,8 @@
 package engineTester;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import models.RawModel;
 import models.TexturedModel;
 
@@ -12,6 +16,7 @@ import Shaders.StaticShader;
 import Textures.ModelTexture;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
+import renderEngine.MasterRenderer;
 import renderEngine.OBJLoader;
 import renderEngine.Renderer;
 public class MainGameLoop {
@@ -21,8 +26,8 @@ public class MainGameLoop {
 		DisplayManager.createDisplay();
 		Loader loader = new Loader();
 		
-		StaticShader shader = new StaticShader();
-		Renderer renderer = new Renderer(shader);
+		//StaticShader shader = new StaticShader();
+		//Renderer renderer = new Renderer(shader);
 		
 		/* these are for a 2d rectange
 		float[] vertices = { 
@@ -126,40 +131,54 @@ public class MainGameLoop {
 
 		};
 		*/
-		RawModel model = OBJLoader.loadObjModel("dragon", loader);
-		TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("white")));
+		RawModel model = OBJLoader.loadObjModel("box", loader);
+		TexturedModel cubeModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("doge-600")));
 		//TexturedModel staticModel = new TexturedModel(model, texture);
-		ModelTexture texture = staticModel.getTexture();
-		texture.setShineDamper(5);
-		texture.setReflectivity(1);
-		Entity entity = new Entity(staticModel, new Vector3f(0,0,-25),0,0,0,1);
-		Light light = new Light(new Vector3f(0,0,-20),new Vector3f(1,1,1));
+		//ModelTexture texture = staticModel.getTexture();
+		//texture.setShineDamper(5);
+		//texture.setReflectivity(1);
+		//Entity entity = new Entity(staticModel, new Vector3f(0,0,-25),0,0,0,1);
+		Light light = new Light(new Vector3f(3000,2000,3000),new Vector3f(1,1,1));
 		Camera camera = new Camera();
+		List<Entity> allCubes = new ArrayList<Entity>();
+		Random random = new Random();
 		
+		for(int i = 0; i<200;i++){
+			float x = random.nextFloat() * 100-50;
+			float y = random.nextFloat() * 100-50;
+			float z = random.nextFloat() * -300;
+			allCubes.add(new Entity(cubeModel, new Vector3f(x,y,z), random.nextFloat() *180f,
+					random.nextFloat() *180f,0f,1f));
+		}
 		
-		
+		MasterRenderer renderer = new MasterRenderer();
 		while(!Display.isCloseRequested()){
 			//sets change in position x, y, z
-			entity.increaseRotation(0, 1, 0);
+			
 			//entity.increasePosition(0, 0, -0.1f);
 			camera.move();
+			for(Entity cube : allCubes){
+				renderer.processEntity(cube);
+			}
 			//sets change in rotation x, y, z
 			//entity.increaseRotation(0, 0, 0);
 			//prepares the renderer to "draw" the program
-			renderer.prepare();
+			//renderer.prepare();
 			//starts the shaders
-			shader.start();
-			shader.loadLight(light);
-			shader.loadViewMatrix(camera);
+			//shader.start();
+			//shader.loadLight(light);
+			//shader.loadViewMatrix(camera);
 		//game logic
 			//tells renderer what to render
-		renderer.render(entity,shader);
+		//renderer.render(entity,shader);
 		//stops the shaders
-		shader.stop();
+		//shader.stop();
+			renderer.render(light,camera);
 		DisplayManager.updateDisplay();
 
 	}
-		shader.cleanUp();
+		//shader.cleanUp();
+		renderer.cleanUp();
 		loader.cleanUP();
 	DisplayManager.closeDisplay();
 	}
