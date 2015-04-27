@@ -141,13 +141,15 @@ public class MainGameLoop {
 		//texture.setShineDamper(5);
 		//texture.setReflectivity(1);
 		Entity entity = new Entity(staticModel, new Vector3f(0,0,-25),0,0,0,1);
-		Terrain terrain = new Terrain(0,0, loader, new ModelTexture(loader.loadTexture("doge-600")));
-		Terrain terrain2 = new Terrain(1,0, loader, new ModelTexture(loader.loadTexture("doge-600")));
+		
 
 		Light light = new Light(new Vector3f(3000,2000,3000),new Vector3f(1,1,1));
+		
+		Terrain terrain = new Terrain(0,-1, loader, new ModelTexture(loader.loadTexture("doge-600")));
+		Terrain terrain2 = new Terrain(1,-1, loader, new ModelTexture(loader.loadTexture("doge-600")));
 		Camera camera = new Camera();
-		List<Entity> allCubes = new ArrayList<Entity>();
-		Random random = new Random();
+		//List<Entity> allCubes = new ArrayList<Entity>();
+		//Random random = new Random();
 		
 		/*for(int i = 0; i<200;i++){
 			float x = random.nextFloat() * 100-50;
@@ -165,6 +167,8 @@ public class MainGameLoop {
 			camera.move();
 			renderer.processTerrain(terrain);
 			renderer.processTerrain(terrain2);
+			renderer.processEntity(entity);
+			
 			//for(Entity cube : allCubes){
 				//renderer.processEntity(cube);
 			//}
@@ -181,7 +185,7 @@ public class MainGameLoop {
 		//renderer.render(entity,shader);
 		//stops the shaders
 		//shader.stop();
-			renderer.render(light,camera);
+		renderer.render(light,camera);
 		DisplayManager.updateDisplay();
 
 	}
