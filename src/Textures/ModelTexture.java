@@ -7,6 +7,14 @@ public class ModelTexture {
 	private float shineDamper = 1;
 	private float reflectivity = 0;
 	
+	private boolean hasTransparancy = false;
+	
+	public boolean isHasTransparancy() {
+		return hasTransparancy;
+	}
+	public void setHasTransparancy(boolean hasTransparancy) {
+		this.hasTransparancy = hasTransparancy;
+	}
 	public float getShineDamper() {
 		return shineDamper;
 	}

@@ -132,32 +132,42 @@ public class MainGameLoop {
 
 		};
 		*/
-		RawModel model = OBJLoader.loadObjModel("dragon", loader);
-		TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("doge-600")));
+		RawModel model = OBJLoader.loadObjModel("Tree", loader);
+		TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("tree")));
 		
-		
+		TexturedModel grass = new TexturedModel(OBJLoader.loadObjModel("grassModel", loader),
+				new ModelTexture(loader.loadTexture("grassTexture")));
+		TexturedModel fern = new TexturedModel(OBJLoader.loadObjModel("fern", loader),
+				new ModelTexture(loader.loadTexture("fern")));
+		//RawModel model1 = OBJLoader.loadObjModel("grassModel", loader);
+		//TexturedModel staticModel1 = new TexturedModel(model1, new ModelTexture(loader.loadTexture("grassTexture")));
 		///TexturedModel staticModel = new TexturedModel(model, texture);
 		ModelTexture texture = staticModel.getTexture();
+		//ModelTexture texture1 = staticModel1.getTexture();
 		//texture.setShineDamper(5);
 		//texture.setReflectivity(1);
-		Entity entity = new Entity(staticModel, new Vector3f(0,0,-25),0,0,0,1);
+		Entity entity = new Entity(staticModel, new Vector3f(10,0,-25),0,0,0,1);
+		//Entity entity1 = new Entity(staticModel1, new Vector3f(20,0,-25),0,0,0,1);
 		
 
 		Light light = new Light(new Vector3f(3000,2000,3000),new Vector3f(1,1,1));
 		
-		Terrain terrain = new Terrain(0,-1, loader, new ModelTexture(loader.loadTexture("doge-600")));
-		Terrain terrain2 = new Terrain(1,-1, loader, new ModelTexture(loader.loadTexture("doge-600")));
+		Terrain terrain = new Terrain(0,-1, loader, new ModelTexture(loader.loadTexture("Grass")));
+		Terrain terrain2 = new Terrain(1,-1, loader, new ModelTexture(loader.loadTexture("Grass")));
 		Camera camera = new Camera();
-		//List<Entity> allCubes = new ArrayList<Entity>();
-		//Random random = new Random();
+		List<Entity> entities = new ArrayList<Entity>();
+		Random random = new Random();
 		
-		/*for(int i = 0; i<200;i++){
-			float x = random.nextFloat() * 100-50;
-			float y = random.nextFloat() * 100-50;
-			float z = random.nextFloat() * -300;
-			allCubes.add(new Entity(staticModel, new Vector3f(x,y,z), random.nextFloat() *180f,
-					random.nextFloat() *180f,0f,1f));*/
-		
+		for(int i = 0; i <500; i++){
+			entities.add(new Entity(staticModel, new Vector3f(random.nextFloat() * 800 -400,0,
+					random.nextFloat()*-600),0,0,0,3));
+			entities.add(new Entity(grass, new Vector3f(random.nextFloat() * 800 -400,0,
+					random.nextFloat()*-600),0,0,0,1));
+			grass.getTexture().setHasTransparancy(true);
+			entities.add(new Entity(fern, new Vector3f(random.nextFloat() * 800 -400,0,
+					random.nextFloat()*-600),0,0,0,0.6f));
+			fern.getTexture().setHasTransparancy(true);
+		}
 		
 		MasterRenderer renderer = new MasterRenderer();
 		while(!Display.isCloseRequested()){
@@ -169,9 +179,10 @@ public class MainGameLoop {
 			renderer.processTerrain(terrain2);
 			renderer.processEntity(entity);
 			
-			//for(Entity cube : allCubes){
-				//renderer.processEntity(cube);
-			//}
+			for(Entity all :entities){
+				renderer.processEntity(all);
+			}
+			
 			//sets change in rotation x, y, z
 			//entity.increaseRotation(0, 0, 0);
 			//prepares the renderer to "draw" the program
