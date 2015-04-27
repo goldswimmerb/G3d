@@ -1,6 +1,7 @@
 package Shaders;
 
 import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector3f;
 
 import Entities.Camera;
 import Entities.Light;
@@ -17,6 +18,9 @@ private static final String FRAGMENT_FILE = "src/shaders/fragmentShader.txt";
 	private int location_lightColor;
 	private int location_shineDamper;
 	private int location_reflectivity;
+	private int location_useFakeLighting;
+	private int location_skyColor;
+
 
 	//loads vertex and fragment shader
 	public StaticShader() {
@@ -44,8 +48,17 @@ private static final String FRAGMENT_FILE = "src/shaders/fragmentShader.txt";
 		location_lightColor = super.getUniformLocation("lightColor");
 		location_shineDamper = super.getUniformLocation("shineDamper");
 		location_reflectivity = super.getUniformLocation("reflectivity");
+		location_useFakeLighting = super.getUniformLocation("useFakeLighting");
+		location_skyColor = super.getUniformLocation("skyColor");
 
 
+	}
+	public void loadSkyColor(float r, float g, float b){
+		super.loadVector(location_skyColor, new Vector3f(r,g,b));
+		
+	}
+	public void loadFakeLightingVariable(boolean useFake){
+		super.loadBoolean(location_useFakeLighting, useFake);
 	}
 	public void loadShineVariables(float damper, float reflectivity){
 		super.loadFloat(location_shineDamper,  damper);

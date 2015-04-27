@@ -158,13 +158,14 @@ public class MainGameLoop {
 		List<Entity> entities = new ArrayList<Entity>();
 		Random random = new Random();
 		
-		for(int i = 0; i <500; i++){
-			entities.add(new Entity(staticModel, new Vector3f(random.nextFloat() * 800 -400,0,
+		for(int i = 0; i <20000; i++){
+			entities.add(new Entity(staticModel, new Vector3f(random.nextFloat() * 50000 -400,0,
 					random.nextFloat()*-600),0,0,0,3));
-			entities.add(new Entity(grass, new Vector3f(random.nextFloat() * 800 -400,0,
+			entities.add(new Entity(grass, new Vector3f(random.nextFloat() * 50000 -400,0,
 					random.nextFloat()*-600),0,0,0,1));
 			grass.getTexture().setHasTransparancy(true);
-			entities.add(new Entity(fern, new Vector3f(random.nextFloat() * 800 -400,0,
+			grass.getTexture().setUseFakeLighting(true);
+			entities.add(new Entity(fern, new Vector3f(random.nextFloat() * 50000 -400,0,
 					random.nextFloat()*-600),0,0,0,0.6f));
 			fern.getTexture().setHasTransparancy(true);
 		}
