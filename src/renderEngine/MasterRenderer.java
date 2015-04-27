@@ -28,7 +28,7 @@ public class MasterRenderer {
 	
 	private static final float RED = 0.5f;
 	private static final float GREEN = 0.5f;
-	private static final float BLUE = 0.5f;
+	private static final float BLUE = 0.9f;
 	
 	private TerrainRenderer terrainRenderer;
 	private TerrainShader terrainShader = new TerrainShader();
@@ -56,6 +56,7 @@ public class MasterRenderer {
 		renderer.render(entities);
 		shader.stop();
 		terrainShader.start();
+		terrainShader.loadSkyColor(RED,GREEN,BLUE);
 		terrainShader.loadLight(sun);
 		terrainShader.loadViewMatrix(camera);
 		terrainRenderer.render(terrains);
