@@ -163,7 +163,7 @@ public class MainGameLoop {
 		for(int i = 0; i <1000; i++){
 			entities.add(new Entity(staticModel, new Vector3f(random.nextFloat() * 1000 -400,0,
 					random.nextFloat()*-600),0,0,0,3));
-			entities.add(new Entity(lowTree, new Vector3f(random.nextFloat() * 800 -400,0,
+			entities.add(new Entity(lowTree, new Vector3f(random.nextFloat() * 500 -400,0,
 					random.nextFloat()*-600),1,0,0,.2f));
 			entities.add(new Entity(grass, new Vector3f(random.nextFloat() * 1000 -400,0,
 					random.nextFloat()*-600),0,0,0,1));
