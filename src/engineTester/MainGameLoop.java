@@ -19,6 +19,8 @@ import renderEngine.Loader;
 import renderEngine.MasterRenderer;
 import renderEngine.OBJLoader;
 import terrains.Terrain;
+import terrains.TerrainTexture;
+import terrains.TerrainTexturePack;
 //import renderEngine.Renderer;
 public class MainGameLoop {
 
@@ -132,6 +134,15 @@ public class MainGameLoop {
 
 		};
 		*/
+		//Terrain Texture stuff
+		TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grass"));
+		TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("dirt"));
+		TerrainTexture gTexture = new TerrainTexture(loader.loadTexture("pinkFlowers"));
+		TerrainTexture bTexture = new TerrainTexture(loader.loadTexture("path"));
+		
+		TerrainTexturePack texturePack = new TerrainTexturePack(backgroundTexture, rTexture, gTexture, bTexture);
+		TerrainTexture blendMap = new TerrainTexture(loader.loadTexture("blendMap"));
+		
 		RawModel model = OBJLoader.loadObjModel("Tree", loader);
 		TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("tree")));
 		
@@ -154,13 +165,13 @@ public class MainGameLoop {
 
 		Light light = new Light(new Vector3f(3000,2000,3000),new Vector3f(1,1,1));
 		
-		Terrain terrain = new Terrain(0,-1, loader, new ModelTexture(loader.loadTexture("Grass")));
-		Terrain terrain2 = new Terrain(1,-1, loader, new ModelTexture(loader.loadTexture("Grass")));
+		Terrain terrain = new Terrain(0,-1, loader,texturePack, blendMap);
+		Terrain terrain2 = new Terrain(1,-1, loader, texturePack, blendMap);
 		Camera camera = new Camera();
 		List<Entity> entities = new ArrayList<Entity>();
 		Random random = new Random();
 		
-		for(int i = 0; i <1000; i++){
+		for(int i = 0; i <500; i++){
 			entities.add(new Entity(staticModel, new Vector3f(random.nextFloat() * 1000 -400,0,
 					random.nextFloat()*-600),0,0,0,3));
 			entities.add(new Entity(lowTree, new Vector3f(random.nextFloat() * 500 -400,0,
