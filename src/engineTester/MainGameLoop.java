@@ -136,7 +136,7 @@ public class MainGameLoop {
 		*/
 		//Terrain Texture stuff
 		TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grass"));
-		TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("dirt"));
+		TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("mud"));
 		TerrainTexture gTexture = new TerrainTexture(loader.loadTexture("pinkFlowers"));
 		TerrainTexture bTexture = new TerrainTexture(loader.loadTexture("path"));
 		

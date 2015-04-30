@@ -52,7 +52,7 @@ public class TerrainShader extends ShaderProgram {
 			location_reflectivity = super.getUniformLocation("reflectivity");
 			location_skyColor = super.getUniformLocation("skyColor");
 			location_backgroundTexture = super.getUniformLocation("backgroundTexture");
-			location_rTexture = super.getUniformLocation("tTexture");
+			location_rTexture = super.getUniformLocation("rTexture");
 			location_gTexture = super.getUniformLocation("gTexture");
 			location_bTexture = super.getUniformLocation("bTexture");
 			location_blendMap = super.getUniformLocation("blendMap");
