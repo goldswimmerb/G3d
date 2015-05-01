@@ -12,6 +12,7 @@ import org.lwjgl.util.vector.Vector3f;
 import Entities.Camera;
 import Entities.Entity;
 import Entities.Light;
+import Entities.Player;
 import Shaders.StaticShader;
 import Textures.ModelTexture;
 import renderEngine.DisplayManager;
@@ -152,6 +153,9 @@ public class MainGameLoop {
 				new ModelTexture(loader.loadTexture("fern")));
 		TexturedModel lowTree = new TexturedModel(OBJLoader.loadObjModel("lowPolyTree", loader),
 				new ModelTexture(loader.loadTexture("lowPolyTree")));
+		RawModel bunnyModel = OBJLoader.loadObjModel("bunny", loader);
+		TexturedModel stanfordBunny = new TexturedModel(bunnyModel, 
+				new ModelTexture(loader.loadTexture("white")));
 		//RawModel model1 = OBJLoader.loadObjModel("grassModel", loader);
 		//TexturedModel staticModel1 = new TexturedModel(model1, new ModelTexture(loader.loadTexture("grassTexture")));
 		///TexturedModel staticModel = new TexturedModel(model, texture);
@@ -160,6 +164,7 @@ public class MainGameLoop {
 		//texture.setShineDamper(5);
 		//texture.setReflectivity(1);
 		Entity entity = new Entity(staticModel, new Vector3f(10,0,-25),0,0,0,1);
+		Player player = new Player(stanfordBunny, new Vector3f(250,0,-50), 0, 0, 0, 1);
 		//Entity entity1 = new Entity(staticModel1, new Vector3f(20,0,-25),0,0,0,1);
 		
 
@@ -170,6 +175,7 @@ public class MainGameLoop {
 		Camera camera = new Camera();
 		List<Entity> entities = new ArrayList<Entity>();
 		Random random = new Random();
+		
 		
 		for(int i = 0; i <500; i++){
 			entities.add(new Entity(staticModel, new Vector3f(random.nextFloat() * 1000 -400,0,
@@ -188,9 +194,11 @@ public class MainGameLoop {
 		MasterRenderer renderer = new MasterRenderer();
 		while(!Display.isCloseRequested()){
 			//sets change in position x, y, z
-			entity.increaseRotation(0, 1, 0);
+			//entity.increaseRotation(0, 1, 0);
 			//entity.increasePosition(0, 0, -0.1f);
 			camera.move();
+			player.move();
+			renderer.processEntity(player);
 			renderer.processTerrain(terrain);
 			renderer.processTerrain(terrain2);
 			renderer.processEntity(entity);
