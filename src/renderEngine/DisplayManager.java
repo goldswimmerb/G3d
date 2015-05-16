@@ -37,6 +37,7 @@ public class DisplayManager {
 		Display.sync(MASTER_RACE);
 		Display.update();
 		long currentFrameTime = getCurrentTime();
+		
 		delta = (currentFrameTime - lastFrameTime) / 1000f;
 		lastFrameTime = currentFrameTime;
 		
@@ -50,7 +51,7 @@ public class DisplayManager {
 		
 	}
 	private static long getCurrentTime(){
-		return Sys.getTime()/Sys.getTimerResolution();
+		return Sys.getTime()*1000/Sys.getTimerResolution();
 	}
 
 }

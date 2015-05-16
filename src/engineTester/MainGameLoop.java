@@ -153,6 +153,8 @@ public class MainGameLoop {
 				new ModelTexture(loader.loadTexture("fern")));
 		TexturedModel lowTree = new TexturedModel(OBJLoader.loadObjModel("lowPolyTree", loader),
 				new ModelTexture(loader.loadTexture("lowPolyTree")));
+		
+		
 		RawModel bunnyModel = OBJLoader.loadObjModel("bunny", loader);
 		TexturedModel stanfordBunny = new TexturedModel(bunnyModel, 
 				new ModelTexture(loader.loadTexture("white")));
