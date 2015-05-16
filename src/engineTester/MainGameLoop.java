@@ -155,9 +155,9 @@ public class MainGameLoop {
 				new ModelTexture(loader.loadTexture("lowPolyTree")));
 		
 		
-		RawModel bunnyModel = OBJLoader.loadObjModel("bunny", loader);
+		RawModel bunnyModel = OBJLoader.loadObjModel("person", loader);
 		TexturedModel stanfordBunny = new TexturedModel(bunnyModel, 
-				new ModelTexture(loader.loadTexture("white")));
+				new ModelTexture(loader.loadTexture("playerTexture")));
 		//RawModel model1 = OBJLoader.loadObjModel("grassModel", loader);
 		//TexturedModel staticModel1 = new TexturedModel(model1, new ModelTexture(loader.loadTexture("grassTexture")));
 		///TexturedModel staticModel = new TexturedModel(model, texture);
@@ -166,7 +166,7 @@ public class MainGameLoop {
 		//texture.setShineDamper(5);
 		//texture.setReflectivity(1);
 		Entity entity = new Entity(staticModel, new Vector3f(10,0,-25),0,0,0,1);
-		Player player = new Player(stanfordBunny, new Vector3f(250,0,-50), 0, 0, 0, 1);
+		Player player = new Player(stanfordBunny, new Vector3f(100,0,-50), 0, 180, 0, 0.4f);
 		//Entity entity1 = new Entity(staticModel1, new Vector3f(20,0,-25),0,0,0,1);
 		
 
@@ -174,7 +174,7 @@ public class MainGameLoop {
 		
 		Terrain terrain = new Terrain(0,-1, loader,texturePack, blendMap);
 		Terrain terrain2 = new Terrain(1,-1, loader, texturePack, blendMap);
-		Camera camera = new Camera();
+		
 		List<Entity> entities = new ArrayList<Entity>();
 		Random random = new Random();
 		
@@ -194,6 +194,8 @@ public class MainGameLoop {
 		}
 		
 		MasterRenderer renderer = new MasterRenderer();
+		
+		Camera camera = new Camera(player);
 		while(!Display.isCloseRequested()){
 			//sets change in position x, y, z
 			//entity.increaseRotation(0, 1, 0);
