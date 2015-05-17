@@ -172,8 +172,8 @@ public class MainGameLoop {
 
 		Light light = new Light(new Vector3f(3000,2000,3000),new Vector3f(1,1,1));
 		
-		Terrain terrain = new Terrain(0,-1, loader,texturePack, blendMap);
-		Terrain terrain2 = new Terrain(1,-1, loader, texturePack, blendMap);
+		Terrain terrain = new Terrain(0,-1, loader,texturePack, blendMap, "heightmap");
+		Terrain terrain2 = new Terrain(1,-1, loader, texturePack, blendMap, "heightmap");
 		
 		List<Entity> entities = new ArrayList<Entity>();
 		Random random = new Random();
