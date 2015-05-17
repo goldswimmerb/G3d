@@ -95,8 +95,11 @@ public class MainGameLoop {
 		 * "grassModel", loader), new ModelTexture(
 		 * loader.loadTexture("grassTexture")));
 		 */
+		
+		ModelTexture fernTextureAtlas = new ModelTexture(loader.loadTexture("fern"));
+		fernTextureAtlas.setNumberOfRows(2); 
 		TexturedModel fern = new TexturedModel(OBJLoader.loadObjModel("fern",
-				loader), new ModelTexture(loader.loadTexture("fern")));
+				loader), fernTextureAtlas);
 		TexturedModel lowTree = new TexturedModel(OBJLoader.loadObjModel(
 				"lowPolyTree", loader), new ModelTexture(
 				loader.loadTexture("lowPolyTree")));
@@ -137,7 +140,7 @@ public class MainGameLoop {
 				float z = random.nextFloat() * -600;
 				float y = terrain.getHeightOfTerrain(x, z);
 
-				entities.add(new Entity(fern, new Vector3f(x, y, z), 0, random
+				entities.add(new Entity(fern, random.nextInt(4), new Vector3f(x, y, z), 0, random
 						.nextFloat() * 360, 0, 0.9f));
 				fern.getTexture().setHasTransparancy(true);
 			}
