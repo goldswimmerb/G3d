@@ -5,7 +5,7 @@ public class TerrainTexturePack {
 	private TerrainTexture rTexture;
 	private TerrainTexture gTexture;
 	private TerrainTexture bTexture;
-	
+
 	public TerrainTexturePack(TerrainTexture backgroundTexture,
 			TerrainTexture rTexture, TerrainTexture gTexture,
 			TerrainTexture bTexture) {
