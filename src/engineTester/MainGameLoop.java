@@ -123,7 +123,7 @@ public class MainGameLoop {
 		Light light = new Light(new Vector3f(3000, 2000, 3000), new Vector3f(1,
 				1, 1));
 
-		Terrain terrain = new Terrain(0, -1, loader, texturePack, blendMap,
+		Terrain terrain = new Terrain( 0, -1, loader, texturePack, blendMap,
 				"heightmap");
 		// Terrain terrain2 = new Terrain(1,-1, loader, texturePack, blendMap,
 		// "heightmap");
@@ -133,7 +133,7 @@ public class MainGameLoop {
 
 		for (int i = 0; i < 500; i++) {
 			if (i % 20 == 0) {
-				float x = random.nextFloat() * 800 - 400;
+				float x = random.nextFloat() * 800;
 				float z = random.nextFloat() * -600;
 				float y = terrain.getHeightOfTerrain(x, z);
 
@@ -142,13 +142,13 @@ public class MainGameLoop {
 				fern.getTexture().setHasTransparancy(true);
 			}
 			if (i % 5 == 0) {
-				float x = random.nextFloat() * 800 - 400;
+				float x = random.nextFloat() * 800;
 				float z = random.nextFloat() * -600;
 				float y = terrain.getHeightOfTerrain(x, z);
 
 				entities.add(new Entity(staticModel, new Vector3f(x, y, z), 0,
 						0, 0, random.nextFloat() * 1 + 4));
-				x = random.nextFloat() * 800 - 400;
+				x = random.nextFloat() * 800;
 				z = random.nextFloat() * -600;
 				y = terrain.getHeightOfTerrain(x, z);
 				entities.add(new Entity(lowTree, new Vector3f(x, y, z), 0,

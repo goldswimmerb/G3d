@@ -14,7 +14,7 @@ import renderEngine.Loader;
 import toolbox.Maths;
 
 public class Terrain {
-	private static final float SIZE = 2000;
+	private static final float SIZE = 3000;
 	// private static final int VERTEX_COUNT = 256;
 	private static final float MAX_HEIGHT = 200;
 	//private static final float MIN_HEIGHT = -40;
