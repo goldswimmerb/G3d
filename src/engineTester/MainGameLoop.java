@@ -151,7 +151,7 @@ public class MainGameLoop {
 			 y = terrain.getHeightOfTerrain(x, z);	
 			entities.add(new Entity(lowTree, new Vector3f(x, y, z), 0, random.nextFloat() * 360
 					, 0, random.nextFloat() * 0.1f + 0.6f));
-			x = random.nextFloat() * 800-400;
+			//adds grass but introduces texture bug atm
 			 z = random.nextFloat() * -600;
 			 y = terrain.getHeightOfTerrain(x, z);	
 			entities.add(new Entity(grass, new Vector3f(x, y, z), 0, random.nextFloat() * 360
@@ -159,7 +159,7 @@ public class MainGameLoop {
 			
 			grass.getTexture().setHasTransparancy(true);
 			grass.getTexture().setUseFakeLighting(true);
-			
+			*/
 		}
 		}
 
